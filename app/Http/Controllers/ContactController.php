@@ -63,7 +63,11 @@ class ContactController extends Controller
             'email' => request('email'),
             'birthday' => request('birthday'),
             'company' => request('company'), 
-        ])
+        ]);
+
+        return (new ContactResource($contact))
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     public function destroy(Contact $contact)
@@ -71,5 +75,7 @@ class ContactController extends Controller
         $this->authorize('delete', $contact);
 
         $contact->delete();
+
+        return response([], Response::HTTP_NO_CONTENT);
     }
 }
