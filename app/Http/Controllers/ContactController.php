@@ -36,7 +36,7 @@ class ContactController extends Controller
 
         return (new ContactResource($contact))
             ->response()
-            ->aetStatusCode(Response::HTTP_CREATED);
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     public function show(Contact $contact)
