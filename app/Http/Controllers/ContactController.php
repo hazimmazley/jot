@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
-use App\Http\Resources\Contact as ContactResource
+use App\Http\Resources\Contact as ContactResource;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -26,12 +27,16 @@ class ContactController extends Controller
             'company' => 'required',     
         ]);
 
-        request()->user()->contacts()->create([
+        $contact = request()->user()->contacts()->create([
             'name' => request('name'),
             'email' => request('email'),
             'birthday' => request('birthday'),
             'company' => request('company'),
         ]);
+
+        return (new ContactResource($contact))
+            ->response()
+            ->aetStatusCode(Response::HTTP_CREATED);
     }
 
     public function show(Contact $contact)
