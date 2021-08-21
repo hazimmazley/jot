@@ -26,6 +26,6 @@ class Contact extends JsonResource
             'links' =>[
                 'self' => $this->path()
             ]
-        ]
+            ];
     }
 }
