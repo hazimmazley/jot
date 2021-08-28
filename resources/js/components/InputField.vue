@@ -13,7 +13,7 @@ export default {
     name: "InputField",
 
     props: [
-        'name', 'label', 'placeholder', 'errors'
+        'name', 'label', 'placeholder', 'errors', 'data',
     ],
 
     data: function() {
@@ -50,6 +50,11 @@ export default {
             return {
                 'error-field': this.hasError
             }
+        }
+    },
+    watch: {
+        data(val) {
+            this.value = val
         }
     }
 }
